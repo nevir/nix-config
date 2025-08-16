@@ -1,0 +1,23 @@
+#!/usr/bin/env sh -e
+
+HOST_ID="${1}"
+
+# TODO: Persist HOST_ID
+# - Require it the first time the script is used
+# - Default to the previously used value (after first use)
+# - Warn if a different HOST_ID is passed.
+if [[ -z "${HOST_ID}" ]]; then
+  echo "USAGE: nix run .#activate -- HOST_ID"
+  exit 1
+fi
+
+git add .
+if [ -z "$(git log @{u}..HEAD)" ]; then
+  git commit -m "WIP"
+else
+  git commit --amend --no-edit
+fi
+
+nix --extra-experimental-features 'nix-command flakes' build .#darwinConfigurations."${HOST_ID}".system
+sudo ./result/sw/bin/darwin-rebuild switch --flake .#"${HOST_ID}"
+unlink ./result

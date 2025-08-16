@@ -1,0 +1,15 @@
+{
+    // Nix
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    "nix.serverSettings": {
+        // https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
+        "nixd": {
+            "formatting": {
+                "command": [
+                    "nixfmt"
+                ],
+            },
+        }
+    }
+}
