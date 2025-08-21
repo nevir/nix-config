@@ -1,6 +1,8 @@
+# https://github.com/nevir/nix-config/issues/4
 { host, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    vscode
     nixd
     nixfmt-rfc-style
   ];

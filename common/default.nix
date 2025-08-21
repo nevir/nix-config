@@ -1,8 +1,7 @@
 { ... }:
 {
   imports = [
-    ./darwin.nix
-    ./home.nix
+    ./home-manager.nix
     ./homebrew.nix
     ./nix.nix
     ./security.nix

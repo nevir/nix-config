@@ -1,21 +1,18 @@
-{ inputs, ... }:
-let
-  # TODO: This should be set per-host, and ideally referenced here.
-  user = "ian";
-in
+{ inputs, host, ... }:
 {
   imports = [ inputs.homebrew.darwinModules.nix-homebrew ];
 
-  system.primaryUser = user;
+  system.primaryUser = host.user;
 
   # https://github.com/zhaofengli/nix-homebrew
   nix-homebrew = {
-    user = user;
+    user = host.user;
     enable = true;
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
     };
+    mutableTaps = false;
   };
 
   homebrew = {

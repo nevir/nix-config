@@ -69,14 +69,6 @@
               home-manager.darwinModules.home-manager
               ./common
               ./programs
-              # TODO: Move somewhere else?
-              {
-                system.stateVersion = host.stateVersion;
-                nixpkgs.hostPlatform = host.platform;
-
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-              }
             ];
           }
         )

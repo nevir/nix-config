@@ -1,4 +1,4 @@
-{ ... }:
+{ host, ... }:
 {
   nix = {
     settings = {
@@ -6,7 +6,13 @@
     };
   };
 
+  system = {
+    stateVersion = host.stateVersion;
+  };
+
   nixpkgs = {
+    hostPlatform = host.platform;
+
     config = {
       allowUnfree = true;
     };

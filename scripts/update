@@ -1,0 +1,18 @@
+#!/usr/bin/env sh -e
+
+HOST_ID="${1}"
+
+# TODO: Persist HOST_ID
+# - Require it the first time the script is used
+# - Default to the previously used value (after first use)
+# - Warn if a different HOST_ID is passed.
+if [[ -z "${HOST_ID}" ]]; then
+  echo "USAGE: nix run .#update HOST_ID"
+  exit 1
+fi
+
+export system_path_before=$(nix build --no-link --print-out-paths .#darwinConfigurations."${HOST_ID}".system)
+nix flake update
+export system_path_after=$(nix build --no-link --print-out-paths .#darwinConfigurations."${HOST_ID}".system)
+
+nix store diff-closures "$system_path_before" "$system_path_after"

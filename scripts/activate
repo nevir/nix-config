@@ -7,7 +7,7 @@ HOST_ID="${1}"
 # - Default to the previously used value (after first use)
 # - Warn if a different HOST_ID is passed.
 if [[ -z "${HOST_ID}" ]]; then
-  echo "USAGE: nix run .#activate -- HOST_ID"
+  echo "USAGE: nix run .#activate HOST_ID"
   exit 1
 fi
 
